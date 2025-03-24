@@ -6,12 +6,14 @@ import protectRoute from "../middleware/auth.middleware.js";
 const router = express.Router();
 
 router.post("/", protectRoute, async (req, res) => {
+
     try {
         const {title, caption, rating, image }= req.body;
         if(!image || !title || !caption || !rating)
         {
             return res.status(400).json({message: "Please provide all fields"});
         }
+    
         const uploadResponse = await cloudinary.uploader.upload(image);
         const imageUrl = uploadResponse.secure_url;
         const newBook = new Book({
