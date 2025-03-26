@@ -142,6 +142,7 @@ router.post("/forgetPassword", async (req,res)=>{
 		if (!user) {
 			return res.status(400).json({ success: false, message: "User not found" });
 		}
+        console.log(`Received email: ${email}`);
 
 		// Generate reset token
 		const resetToken = crypto.randomBytes(20).toString("hex");
