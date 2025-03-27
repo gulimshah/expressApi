@@ -60,8 +60,6 @@ router.delete("/:id", protectRoute, async (req, res) =>{
     try {
         const book = await Book.findById(req.params.id);
         if(!book) return res.status(400).json({message: "Book not found"});
-        console.log(" Book user ref is: ", book.user.toString())
-        conosle.log("Req user ref is: ", req.user._id.toString());
         if(book.user.toString() !== req.user._id.toString())
         {
             return res.status(401).json({message: "Un-authorized to delete the book"});
